@@ -78,7 +78,7 @@ for step in range(STEPS):
     optimizer.zero_grad()
     activations = mlp1(FIXED_INPUT)
     if cuda:
-        activations = activations.to(torch.cuda.device(1))
+        activations = activations.to('cuda:1')
     #activations = activations.detach()
     logits = mlp2(activations)
     #if cuda:

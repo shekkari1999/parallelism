@@ -52,16 +52,16 @@ cuda = False
 if torch.cuda.is_available() and torch.cuda.device_count() >= 2:
     cuda = True
 if cuda:
-    mlp1 = MLP_part_1(LAYERS, HIDDEN_DIM).to(torch.cuda.device(0))
-    mlp2 = MLP_part_2(LAYERS, HIDDEN_DIM).to(torch.cuda.device(1))
+    mlp1 = MLP_part_1(LAYERS, HIDDEN_DIM).to('cuda:0')
+    mlp2 = MLP_part_2(LAYERS, HIDDEN_DIM).to('cuda:1')
 else:
     mlp1 = MLP_part_1(LAYERS, HIDDEN_DIM)
     mlp2 = MLP_part_2(LAYERS, HIDDEN_DIM)
 #----------------------------------------------------------------------------------------------------------------------------
 ## declare data here
 if cuda: 
-    FIXED_INPUT  = torch.randn(BATCH_SIZE, HIDDEN_DIM).to(torch.cuda.device(0))
-    FIXED_TARGET = torch.randint(0, 2, (BATCH_SIZE, )).to(torch.cuda.device(1))
+    FIXED_INPUT  = torch.randn(BATCH_SIZE, HIDDEN_DIM).to('cuda:0')
+    FIXED_TARGET = torch.randint(0, 2, (BATCH_SIZE, )).to('cuda:1')
 else:
     FIXED_INPUT  = torch.randn(BATCH_SIZE, HIDDEN_DIM)
     FIXED_TARGET = torch.randint(0, 2, (BATCH_SIZE, ))

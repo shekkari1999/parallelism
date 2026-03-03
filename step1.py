@@ -79,6 +79,7 @@ for step in range(STEPS):
     activations = mlp1(FIXED_INPUT)
     if cuda:
         activations = activations.to('cuda:1')
+        print('yo')
     #activations = activations.detach()
     logits = mlp2(activations)
     #if cuda:
